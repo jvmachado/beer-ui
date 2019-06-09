@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ContainersPageComponent } from './containers/pages/containers-page.component';
+import { ContainersPageComponent } from './pages/containers-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
     component: ContainersPageComponent
   },
 ];
