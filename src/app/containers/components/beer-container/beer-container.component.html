@@ -1,0 +1,13 @@
+<div class="card beer-container" [ngClass]="{'pulse': beer.isOutRange}">
+    <div class="card-body">
+        <div class="card-title text-center">
+            <h2>{{getBeerName(beer.beerType)}}</h2>
+        </div>
+        <div class="text-right">
+            <p>Temperature {{beer.temperature}}ºC</p>
+        </div>
+        <div *ngIf="beer.isOutRange">
+            WATCH OUT! This container is outside the correct temperature range.
+        </div>
+    </div>
+</div>

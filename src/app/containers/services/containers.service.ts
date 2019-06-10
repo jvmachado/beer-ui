@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { BeerContainer } from './types/beer-container.type';
 
 @Injectable()
 export class ContainersService {
@@ -7,11 +8,11 @@ export class ContainersService {
 
   eventSource;
 
-  connect(): Observable<any> {
+  connect(): Observable<BeerContainer[]> {
     this.eventSource = new EventSource(this.sourceUrl + "containers");
     return Observable.create(observer => {
       const eventSource = this.eventSource;
-      eventSource.onmessage = x => observer.next(x.data);
+      eventSource.onmessage = x => observer.next(JSON.parse(x.data));
       eventSource.onerror = x => observer.error(x);
 
       return () => {

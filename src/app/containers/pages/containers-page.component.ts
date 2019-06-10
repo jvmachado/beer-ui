@@ -1,18 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ContainersService } from '../services/containers.service';
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { ContainersService } from "../services/containers.service";
+import { BeerContainer, BeerType } from "../services/types/beer-container.type";
 
 @Component({
-  selector: 'app-containers-page',
-  templateUrl: './containers-page.component.html',
-  styleUrls: ['./containers-page.component.scss']
+  selector: "app-containers-page",
+  templateUrl: "./containers-page.component.html",
+  styleUrls: ["./containers-page.component.scss"]
 })
 export class ContainersPageComponent implements OnInit {
-  
-  constructor(private service: ContainersService) {}
+  containers;
+
+  constructor(
+    private service: ContainersService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    this.service.connect().subscribe(data =>{
-      console.log(data);
-    })
+    this.service.connect().subscribe(data => {
+      this.containers = data;
+      this.cdr.detectChanges();
+    });
   }
 }
